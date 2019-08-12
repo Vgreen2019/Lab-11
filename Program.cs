@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,23 +8,23 @@ namespace Lab11
     {
         static void Main(string[] args)
         {
+            //PreLim Info
             var moviecategories = new MovieCategories();
 
             var categories = new List<string>();
             categories.Add("\n1. Animated");
             categories.Add("2. Drama");
             categories.Add("3. Horror");
-            categories.Add("4. Sci-Fi\n");
+            categories.Add("4. SciFi\n");
 
             var animatedList = new List<Movies>();
             animatedList.Add(new Movies("The Lion King", "Animated"));
             animatedList.Add(new Movies("Angry Birds 2", "Animated\n"));
-            List<Movies> SortedList = animatedList.OrderByDescending(t => t.Title).ToList();
 
             var dramaList = new List<Movies>();
             dramaList.Add(new Movies("Queen & Slim", "Drama"));
             dramaList.Add(new Movies("The Sun is Also a Star", "Drama\n"));
-
+        
             var horrorList = new List<Movies>();
             horrorList.Sort();
 
@@ -37,23 +37,27 @@ namespace Lab11
             scifiList.Add(new Movies("Hellboy", "Scifi"));
             scifiList.Add(new Movies("Annihilation", "Scifi\n"));
 
+            //Program Begins
            
             Console.WriteLine("Welcome to the Movie List Application! We have tons of options to browse.");
             Console.WriteLine("Please choose a category...");
+
 
             DisplayCategoryList(categories);
 
 
             while (true)
             {
-              string input = Console.ReadLine();
+
+                string input = Console.ReadLine();
                 DisplayMovieList(moviecategories, categories, animatedList, dramaList, horrorList, scifiList, input);
 
             }
 
         }
 
-        private static void DisplayMovieList(MovieCategories moviecategories, List<string> categories, List<Movies> animatedList, List<Movies> dramaList, List<Movies> horrorList, List<Movies> scifiList, string input)
+        // Methods
+        private static void DisplayMovieList(MovieCategories moviecategories, List<string> categories, List<Movies> animatedListInAscOrder, List<Movies> dramaListInAscOrder, List<Movies> horrorListInAscOrder, List<Movies> scifiListInAscOrder, string input)
         {
             bool ignoreCase = true;
             if (Enum.TryParse<MovieTypes>(input, ignoreCase, out MovieTypes result))
@@ -62,7 +66,7 @@ namespace Lab11
                 {
                     case MovieTypes.Animated:
 
-                        moviecategories.AnimatedMovies(animatedList);
+                        moviecategories.AnimatedMovies(animatedListInAscOrder);
                         Console.WriteLine("\nDo you want to look at another category?  (Yes/No)");
 
 
@@ -91,7 +95,7 @@ namespace Lab11
                         break;
 
                     case MovieTypes.Drama:
-                        moviecategories.DramaMovies(dramaList);
+                        moviecategories.DramaMovies(dramaListInAscOrder);
                         Console.WriteLine("\nDo you want to look at another category?  (Yes/No)");
 
                         while (true)
@@ -120,7 +124,7 @@ namespace Lab11
 
                     case MovieTypes.Horror:
 
-                        moviecategories.HorrorMovies(horrorList);
+                        moviecategories.HorrorMovies(horrorListInAscOrder);
                         Console.WriteLine("\nDo you want to look at another category?  (Yes/No)");
 
                         while (true)
@@ -149,7 +153,7 @@ namespace Lab11
 
 
                     case MovieTypes.SciFi:
-                        moviecategories.ScifiMovies(scifiList);
+                        moviecategories.ScifiMovies(scifiListInAscOrder);
                         Console.WriteLine("\nDo you want to look at another category?  (Yes/No)");
 
                         while (true)
@@ -185,7 +189,17 @@ namespace Lab11
                         break;
 
                 }
+               
             }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("That category doesn’t exist. Try again. ");
+
+                DisplayCategoryList(categories);
+                
+            }
+            
         }
 
         private static void DisplayCategoryList(List<string> categories)
