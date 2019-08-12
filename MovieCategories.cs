@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lab11
 {
@@ -7,7 +8,9 @@ namespace Lab11
     {
         public void AnimatedMovies(List<Movies> movies)
         {
-            foreach (var movie in movies)
+            var animatedListInAscOrder = movies.OrderBy(t => t.Title);
+
+            foreach (var movie in animatedListInAscOrder)
             {
                 Console.WriteLine($"{movie.Title}");
             }
@@ -15,7 +18,10 @@ namespace Lab11
         
         public void DramaMovies(List<Movies> movies)
         {
-            foreach (var movie in movies)
+
+            var dramaListInAscOrder = movies.OrderBy(t => t.Title);
+
+            foreach (var movie in dramaListInAscOrder)
             {
                 Console.WriteLine($"{movie.Title}");
             }
@@ -23,7 +29,9 @@ namespace Lab11
 
         public void HorrorMovies(List<Movies> movies)
         {
-            foreach (var movie in movies)
+            var horrorListInAscOrder = movies.OrderBy(t => t.Title);
+
+            foreach (var movie in horrorListInAscOrder)
             {
                 Console.WriteLine($"{movie.Title}");
             }
@@ -31,7 +39,9 @@ namespace Lab11
 
         public void ScifiMovies(List<Movies> movies)
         {
-            foreach (var movie in movies)
+            var scifiListInAscOrder = movies.OrderBy(t => t.Title);
+
+            foreach (var movie in scifiListInAscOrder)
             {
                 Console.WriteLine($"{movie.Title}");
             }
